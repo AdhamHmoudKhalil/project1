@@ -11,6 +11,7 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserRepo repo;
+
     public List<User> getAllProducts(){
         return repo.findAll();
     }
@@ -19,19 +20,23 @@ public class UserService {
         return repo.save(user);
     }
 
-
-    public void delete(int id) {
-        repo.deleteById(id);
+    public void delete(String username) {
+        // Changed from int id to String username
+        repo.deleteById(username);
     }
 
-    public User updateUser(int id, User user) {// würde mehr sinn machen ein object zu erstellen
-    User existingUser = repo.findById(id).orElseThrow(() -> new RuntimeException("kein user gefunden"));
+    public User updateUser(String username, User user) {
+        // Find by username instead of ID
+        User existingUser = repo.findById(username)
+                .orElseThrow(() -> new RuntimeException("Kein User gefunden"));
 
-        existingUser.setName(user.getName());
-        existingUser.getAdresse(user.getAdresse());
-        existingUser.setId(user.getId());
+        // Update user details
+        existingUser.setPasswort(user.getPasswort());
+        existingUser.setNachName(user.getNachName());
+        existingUser.setAdresse(user.getAdresse());
         existingUser.setHausNr(user.getHausNr());
         existingUser.setPostleitzahl(user.getPostleitzahl());
+
         return repo.save(existingUser);
     }
 }

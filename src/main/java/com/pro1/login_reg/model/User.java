@@ -6,28 +6,54 @@ import jakarta.persistence.*;
 @Table(name = "app_user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(unique = true, nullable = false)
+    private String username;
+
+    private String passwort;
+
+
     private String name;
     private String nachName;
     private String adresse;
     private int hausNr;
     private int postleitzahl;
 
-    public int getId() {
-        return id;
+    // Standard-Konstruktor für Hibernate
+    public User() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    // Konstruktor mit Parametern
+    public User(String username, String passwort, String nachName, String adresse, int hausNr, int postleitzahl) {
+        this.username = username;
+        this.passwort = passwort;
+        this.nachName = nachName;
+        this.adresse = adresse;
+        this.hausNr = hausNr;
+        this.postleitzahl = postleitzahl;
     }
 
-    public String getName() {
-        return name;
+    public String getPasswort() {
+        return passwort;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPasswort(String passwort) {
+        this.passwort = passwort;
+    }
+
+    public String getNachName() {
+        return nachName;
+    }
+
+    public void setNachName(String nachName) {
+        this.nachName = nachName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getAdresse() {
@@ -54,7 +80,12 @@ public class User {
         this.postleitzahl = postleitzahl;
     }
 
-// frag wieso
-    public void getAdresse(Object adresse) {
+    public String getName() {
+        return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

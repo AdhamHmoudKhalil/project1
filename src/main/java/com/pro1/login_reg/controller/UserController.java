@@ -12,7 +12,6 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
-
 public class UserController {
     @Autowired
     private UserService service;
@@ -33,16 +32,17 @@ public class UserController {
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/user/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
-        service.delete(id);
+    @DeleteMapping("/user/{username}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String username) {
+        service.delete(username);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/user/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
-        User updatedUser = service.updateUser(id, user);
-        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    @PutMapping("/user/{username}")
+    public ResponseEntity<User> updateUser(@PathVariable String username,
+                                           @RequestBody User user) {
 
+        User updatedUser = service.updateUser(username, user);
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 }
