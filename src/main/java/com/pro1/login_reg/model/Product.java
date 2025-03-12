@@ -1,8 +1,7 @@
 package com.pro1.login_reg.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 @Entity
 public class Product {
 
@@ -12,16 +11,28 @@ public class Product {
     private String name;
     private int quantity;
     private int price;
+    @ManyToOne
+    @JoinColumn(name = "category_id",nullable = false)
+    private ProductCategory category;
 
     public Product() {
 
     }
 
-    public Product(int id, String name, int quantity, int price) {
+    public Product(int id, String name, int quantity, int price,ProductCategory category) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
+        this.category = category;
+    }
+
+    public ProductCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ProductCategory category) {
+        this.category = category;
     }
 
     public int getPrice() {
