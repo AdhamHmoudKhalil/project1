@@ -1,29 +1,38 @@
 package com.pro1.login_reg.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "ID") // Wichtig für JSON
 public class ProductCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
+    private int id;
 
     private String name;
     private String beschreibung;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products;
 
+    public ProductCategory() {}
 
-    public int getID() {
-        return ID;
+    public ProductCategory(int id, String name, String beschreibung, List<Product> products) {
+        this.id = id;
+        this.name = name;
+        this.beschreibung = beschreibung;
+        this.products = products;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public int getID() {
+        return id;
+    }
+
+    public void setID(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -48,15 +57,5 @@ public class ProductCategory {
 
     public void setProducts(List<Product> products) {
         this.products = products;
-    }
-
-    @Override
-    public String toString() {
-        return "ProductCategory{" +
-                "ID=" + ID +
-                ", name='" + name + '\'' +
-                ", beschreibung='" + beschreibung + '\'' +
-                ", products=" + products +
-                '}';
     }
 }

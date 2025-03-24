@@ -5,6 +5,7 @@ import com.pro1.login_reg.repo.ProCatRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class ProCatService {
     private final ProCatRepo repu;

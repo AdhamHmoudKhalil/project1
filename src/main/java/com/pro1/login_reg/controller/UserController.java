@@ -2,6 +2,7 @@ package com.pro1.login_reg.controller;
 
 import com.pro1.login_reg.model.User;
 import com.pro1.login_reg.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class UserController {
     public String test() {
         return "hallo";
     }
-
+    @Operation(summary = "Gibt alle Produckte zurück")
     @GetMapping("/alleUser")
     public ResponseEntity<List<User>> getAllUser() {
         return new ResponseEntity<>(service.getAllProducts(), HttpStatus.OK);
