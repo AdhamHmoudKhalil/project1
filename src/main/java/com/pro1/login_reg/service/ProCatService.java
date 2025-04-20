@@ -3,10 +3,12 @@ package com.pro1.login_reg.service;
 import com.pro1.login_reg.model.ProductCategory;
 import com.pro1.login_reg.repo.ProCatRepo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ProCatService {
     private final ProCatRepo repu;
 

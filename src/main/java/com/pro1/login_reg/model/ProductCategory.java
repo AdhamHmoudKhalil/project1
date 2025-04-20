@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "ID") // Wichtig für JSON
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id") // Wichtig für JSON
 public class ProductCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,16 +15,14 @@ public class ProductCategory {
     private String name;
     private String beschreibung;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Product> products;
+
 
     public ProductCategory() {}
 
-    public ProductCategory(int id, String name, String beschreibung, List<Product> products) {
+    public ProductCategory(int id, String name, String beschreibung) {
         this.id = id;
         this.name = name;
         this.beschreibung = beschreibung;
-        this.products = products;
     }
 
     public int getID() {
@@ -51,11 +49,4 @@ public class ProductCategory {
         this.beschreibung = beschreibung;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
 }
